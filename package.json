@@ -1,0 +1,41 @@
+{
+  "name": "antigravity-job-autopilot",
+  "version": "1.0.0",
+  "description": "Production-ready autonomous job hunting radar, ATS resume score optimizer (90%+ match), recruiter intelligence, cold outreach studio, and 1-click application autofill.",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohdsaif13/antigravity-job-autopilot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mohdsaif13/antigravity-job-autopilot/issues"
+  },
+  "homepage": "https://github.com/mohdsaif13/antigravity-job-autopilot#readme",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "cli": "node scripts/run_job_search.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "job-hunt",
+    "ats-resume-optimizer",
+    "recruiter-intelligence",
+    "job-automation",
+    "cold-email",
+    "free-tier",
+    "gemini-ai",
+    "antigravity"
+  ],
+  "author": "MD SAIF ALI <mdsa9176@gmail.com>",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.8",
+    "express": "^5.3.0",
+    "multer": "^2.4.0",
+    "nodemailer": "^10.1.7",
+    "pdf-parse": "^2.4.5"
+  }
+}

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antigravity Job Autopilot | Free AI Job Search, ATS Score Fixer & Recruiter Outreach</title>
+  <meta name="description" content="All-in-one 100% free automated job hunting platform. Searches live tech jobs, optimizes ATS resume score to 90%+, uncovers recruiter emails, and automates outreach.">
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Navigation & Brand Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-wrapper">
+        <div class="brand-icon-box">⚡</div>
+        <div>
+          <div class="brand-title">Antigravity Job Autopilot</div>
+          <span class="brand-badge">100% FREE AUTOMATION ENGINE</span>
+        </div>
+      </div>
+
+      <!-- Real-Time Metrics Bar -->
+      <div class="header-metrics-bar">
+        <div class="metric-pill cyan" id="statJobsPill">
+          <span>Live Jobs</span>
+          <strong id="statLiveJobsCount">0</strong>
+        </div>
+        <div class="metric-pill violet" id="statAtsPill">
+          <span>Target ATS</span>
+          <strong id="statAtsScoreDisplay">90%+</strong>
+        </div>
+        <div class="metric-pill emerald" id="statInterviewsPill">
+          <span>Pipeline</span>
+          <strong id="statInterviewsCount">0 Active</strong>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="header-actions">
+        <button class="btn btn-secondary btn-sm" id="btnOpenAutofillModal" title="Get 1-click application autofill script">
+          ⚡ 1-Click Autofill
+        </button>
+        <button class="btn btn-primary btn-sm" id="btnQuickSearchSync" title="Sync latest jobs from all free APIs">
+          🔄 Sync Jobs
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Section Navigation Tabs -->
+  <nav class="nav-tabs-wrapper" aria-label="Main Navigation">
+    <div class="nav-tabs" role="tablist">
+      <button class="tab-btn active" id="navTabJobs" data-target="tabJobs" role="tab" aria-selected="true">
+        🧭 1. Job Radar <span class="tab-badge" id="badgeJobsCount">0</span>
+      </button>
+      <button class="tab-btn" id="navTabAts" data-target="tabAts" role="tab" aria-selected="false">
+        🎯 2. ATS Resume Optimizer
+      </button>
+      <button class="tab-btn" id="navTabRecruiter" data-target="tabRecruiter" role="tab" aria-selected="false">
+        🕵️ 3. Recruiter Intel & Outreach
+      </button>
+      <button class="tab-btn" id="navTabTracker" data-target="tabTracker" role="tab" aria-selected="false">
+        📊 4. Auto-Apply & Tracker <span class="tab-badge" id="badgeAppsCount">0</span>
+      </button>
+      <button class="tab-btn" id="navTabProfile" data-target="tabProfile" role="tab" aria-selected="false">
+        ⚙️ 5. Profile & Free Setup
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="main-container">
+    
+    <!-- ====================================================================
+         TAB 1: JOB DISCOVERY RADAR
+         ==================================================================== -->
+    <section class="tab-pane active" id="tabJobs" role="tabpanel">
+      <div class="section-header">
+        <div>
+          <h1 class="section-title">AI Job Radar & Aggregator</h1>
+          <p class="section-subtitle">Real-time aggregated jobs from Arbeitnow, RemoteOK, Jobicy & top tech companies. 100% Free with zero API cost.</p>
+        </div>
+        <div>
+          <span class="metric-pill" id="cacheTimestampLabel">Updated: Just now</span>
+        </div>
+      </div>
+
+      <!-- Search & Filter Controls -->
+      <div class="search-filter-card">
+        <div class="search-inputs-grid">
+          <div>
+            <input type="text" class="input-box" id="jobSearchInput" placeholder="Job Title or Keywords (e.g. Full Stack, Python, React, AI Engineer)...">
+          </div>
+          <div>
+            <input type="text" class="input-box" id="jobLocationInput" placeholder="Location (e.g. Remote, US, Worldwide)...">
+          </div>
+          <div>
+            <label class="custom-checkbox">
+              <input type="checkbox" id="jobRemoteOnlyCheckbox" checked>
+              <span>Remote Jobs Only</span>
+            </label>
+          </div>
+          <div>
+            <button class="btn btn-primary" id="btnExecuteJobSearch">
+              🔍 Search Jobs
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-pills-row">
+          <div class="quick-tags-container" id="quickTagsContainer">
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Quick Filter:</span>
+            <button class="quick-tag" data-tag="react">React</button>
+            <button class="quick-tag" data-tag="python">Python</button>
+            <button class="quick-tag" data-tag="node">Node.js</button>
+            <button class="quick-tag" data-tag="typescript">TypeScript</button>
+            <button class="quick-tag" data-tag="ai">AI / ML</button>
+            <button class="quick-tag" data-tag="fullstack">Full Stack</button>
+            <button class="quick-tag" data-tag="frontend">Frontend</button>
+            <button class="quick-tag" data-tag="backend">Backend</button>
+          </div>
+          <div>
+            <button class="btn btn-secondary btn-sm" id="btnDorkGoogleJobs">
+              🌐 Google & LinkedIn Search Dorks
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jobs Grid -->
+      <div class="jobs-grid" id="jobsGridContainer">
+        <!-- Rendered dynamically -->
+        <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--text-secondary);">
+          <div style="font-size: 2rem; margin-bottom: 10px;">📡</div>
+          <p>Loading live jobs from free providers...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TAB 2: ATS RESUME OPTIMIZER & SCORER
+         ==================================================================== -->
+    <section class="tab-pane" id="tabAts" role="tabpanel">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">ATS Resume Optimizer & Matcher</h2>
+          <p class="section-subtitle">Real-time keyword matching, impact metrics scoring, and automated STAR tailoring to achieve 90%+ ATS clearance.</p>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <input type="file" id="fileResumeUpload" accept=".pdf,.txt" style="display: none;">
+          <button class="btn btn-secondary btn-sm" id="btnTriggerUpload">
+            📄 Upload Resume (PDF / TXT)
+          </button>
+          <button class="btn btn-violet btn-sm" id="btnRunAtsScoring">
+            🎯 Calculate ATS Score
+          </button>
+        </div>
+      </div>
+
+      <!-- ATS Score Dashboard -->
+      <div class="ats-score-dashboard" id="atsScoreCard">
+        <div class="score-gauge-box">
+          <svg viewBox="0 0 36 36" class="circular-chart">
+            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            <path class="circle" id="scoreCirclePath" stroke="#06B6D4" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            <text x="18" y="20.35" class="score-text" id="scoreNumberText">--</text>
+            <text x="18" y="25" class="score-label">ATS SCORE</text>
+          </svg>
+          <div style="font-size: 0.82rem; margin-top: 6px; font-weight: 600;" id="scoreStatusBadge">Awaiting Analysis</div>
+        </div>
+
+        <div>
+          <div class="score-breakdown-grid">
+            <div class="breakdown-box">
+              <div class="breakdown-header">
+                <span>Keyword Match</span>
+                <strong id="breakdownKeywords">0 / 45</strong>
+              </div>
+              <div class="breakdown-bar-bg">
+                <div class="breakdown-bar-fill" id="barKeywords" style="width: 0%; background: var(--accent-cyan);"></div>
+              </div>
+            </div>
+
+            <div class="breakdown-box">
+              <div class="breakdown-header">
+                <span>Action Verbs</span>
+                <strong id="breakdownVerbs">0 / 15</strong>
+              </div>
+              <div class="breakdown-bar-bg">
+                <div class="breakdown-bar-fill" id="barVerbs" style="width: 0%; background: var(--accent-violet);"></div>
+              </div>
+            </div>
+
+            <div class="breakdown-box">
+              <div class="breakdown-header">
+                <span>Quantifiable Metrics</span>
+                <strong id="breakdownMetrics">0 / 20</strong>
+              </div>
+              <div class="breakdown-bar-bg">
+                <div class="breakdown-bar-fill" id="barMetrics" style="width: 0%; background: var(--accent-emerald);"></div>
+              </div>
+            </div>
+
+            <div class="breakdown-box">
+              <div class="breakdown-header">
+                <span>Section Headers</span>
+                <strong id="breakdownStructure">0 / 10</strong>
+              </div>
+              <div class="breakdown-bar-bg">
+                <div class="breakdown-bar-fill" id="barStructure" style="width: 0%; background: var(--accent-blue);"></div>
+              </div>
+            </div>
+
+            <div class="breakdown-box">
+              <div class="breakdown-header">
+                <span>Readability & Format</span>
+                <strong id="breakdownReadability">0 / 10</strong>
+              </div>
+              <div class="breakdown-bar-bg">
+                <div class="breakdown-bar-fill" id="barReadability" style="width: 0%; background: var(--accent-amber);"></div>
+              </div>
+            </div>
+
+            <div class="breakdown-box">
+              <div class="breakdown-header">
+                <span>Total ATS Match</span>
+                <strong id="breakdownOverall">0%</strong>
+              </div>
+              <div class="breakdown-bar-bg">
+                <div class="breakdown-bar-fill" id="barOverall" style="width: 0%; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-emerald));"></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 14px; display: flex; gap: 10px; align-items: center;">
+            <button class="btn btn-emerald btn-sm" id="btnAutoTailorResume">
+              ✨ Fix & Tailor Resume (Auto-Boost to 90%+)
+            </button>
+            <button class="btn btn-secondary btn-sm" id="btnExportOptimizedResume">
+              📥 Copy ATS Optimized Markdown
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Keywords Analysis Card -->
+      <div class="keywords-cloud-card">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="font-size: 0.95rem; font-weight: 700; color: #FFFFFF;">
+            Missing Keywords (Click any tag to copy):
+          </h3>
+          <span style="font-size: 0.8rem; color: var(--text-muted);" id="missingKeywordsCount">0 detected</span>
+        </div>
+        <div class="keywords-pills-wrap" id="missingKeywordsContainer">
+          <span style="font-size: 0.85rem; color: var(--text-secondary);">Click "Calculate ATS Score" below to extract target keywords.</span>
+        </div>
+
+        <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="font-size: 0.95rem; font-weight: 700; color: #FFFFFF;">
+            Matched Keywords:
+          </h3>
+          <span style="font-size: 0.8rem; color: var(--text-muted);" id="matchedKeywordsCount">0 matched</span>
+        </div>
+        <div class="keywords-pills-wrap" id="matchedKeywordsContainer"></div>
+      </div>
+
+      <!-- Dual Pane Resume & Job Description Inputs -->
+      <div class="ats-studio-grid">
+        <!-- Resume Editor -->
+        <div class="ats-pane-card">
+          <div class="ats-pane-title">
+            <span>📄 Candidate Resume Text</span>
+            <button class="btn btn-secondary btn-sm" id="btnLoadProfileResume">Load Saved Profile Resume</button>
+          </div>
+          <textarea class="input-box" id="resumeTextInput" style="height: 380px; font-family: monospace; font-size: 0.82rem;" placeholder="Paste your resume here or upload via PDF above..."></textarea>
+        </div>
+
+        <!-- Job Description Editor -->
+        <div class="ats-pane-card">
+          <div class="ats-pane-title">
+            <span>🎯 Target Job Description</span>
+            <button class="btn btn-secondary btn-sm" id="btnClearJd">Clear</button>
+          </div>
+          <textarea class="input-box" id="jobDescInput" style="height: 380px; font-family: monospace; font-size: 0.82rem;" placeholder="Paste the target job description here (or select any job from the Radar tab)..."></textarea>
+        </div>
+      </div>
+
+      <!-- Tailored Output Preview -->
+      <div class="ats-pane-card" id="tailoredOutputBox" style="display: none; margin-top: 14px;">
+        <div class="ats-pane-title">
+          <span>🚀 AI Tailored Resume & High-Impact STAR Bullets</span>
+          <span class="confidence-tag" id="tailoringEngineTag">Ready</span>
+        </div>
+        <div id="tailoredBulletsBox" style="background: rgba(13, 20, 36, 0.8); border: 1px solid var(--border-subtle); padding: 14px; border-radius: var(--radius-md); margin-bottom: 12px;"></div>
+        <textarea class="input-box" id="optimizedResumeText" style="height: 320px; font-family: monospace; font-size: 0.82rem;"></textarea>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TAB 3: RECRUITER FINDER & COLD OUTREACH
+         ==================================================================== -->
+    <section class="tab-pane" id="tabRecruiter" role="tabpanel">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Recruiter Intel & Cold Outreach Studio</h2>
+          <p class="section-subtitle">Predict hiring manager email formats, search company technical recruiters via Google Dorks, and send high-converting pitches.</p>
+        </div>
+      </div>
+
+      <div class="recruiter-grid">
+        <!-- Left: Recruiter Intel Finder -->
+        <div class="recruiter-intel-card">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #FFFFFF;">🕵️ Recruiter Search & Domain Intel</h3>
+          
+          <div>
+            <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Target Company Name:</label>
+            <input type="text" class="input-box" id="recruiterCompanyInput" placeholder="e.g. Stripe, Datadog, Spotify...">
+          </div>
+
+          <div>
+            <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Target Role Title:</label>
+            <input type="text" class="input-box" id="recruiterRoleInput" placeholder="e.g. Senior Software Engineer">
+          </div>
+
+          <button class="btn btn-primary" id="btnFetchRecruiterIntel">
+            🔍 Uncover Recruiter Emails & Profiles
+          </button>
+
+          <!-- Direct Dork Links -->
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 6px;">
+            <a href="#" target="_blank" class="btn btn-secondary btn-sm" id="linkLinkedinRecruiters" style="justify-content: flex-start;">
+              👔 Search Technical Recruiters on LinkedIn
+            </a>
+            <a href="#" target="_blank" class="btn btn-secondary btn-sm" id="linkGoogleDork" style="justify-content: flex-start;">
+              🎯 Google Dork Search for Hiring Managers
+            </a>
+            <a href="#" target="_blank" class="btn btn-secondary btn-sm" id="linkCompanyCareers" style="justify-content: flex-start;">
+              🌐 Company Careers & Job Page
+            </a>
+          </div>
+
+          <div style="margin-top: 10px;">
+            <h4 style="font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 8px;">
+              Predicted Email Patterns (Based on Company Domain):
+            </h4>
+            <div class="pattern-list" id="emailPatternList">
+              <div class="pattern-item">
+                <span>recruiting@company.com</span>
+                <span class="confidence-tag">92% High</span>
+              </div>
+              <div class="pattern-item">
+                <span>talent@company.com</span>
+                <span class="confidence-tag">88% High</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Email Pitch Generator & Direct Mailer -->
+        <div class="recruiter-intel-card">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #FFFFFF;">✉️ Automated Cold Outreach Mailer</h3>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+              <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Select Template:</label>
+              <select class="input-box" id="selectEmailTemplate">
+                <option value="direct_pitch">Direct Hiring Manager Pitch (Recommended)</option>
+                <option value="recruiter_referral">Internal Recruiter / Talent Sourcer</option>
+                <option value="value_add_project">Value-Add & Problem Solver</option>
+                <option value="follow_up">Gentle Follow-Up (Day 4-7)</option>
+              </select>
+            </div>
+            <div>
+              <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Recruiter Name (Optional):</label>
+              <input type="text" class="input-box" id="inputRecruiterName" placeholder="e.g. Sarah or Hiring Team">
+            </div>
+          </div>
+
+          <div>
+            <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Recipient Email Address:</label>
+            <input type="email" class="input-box" id="inputRecipientEmail" placeholder="e.g. sarah.recruiter@company.com">
+          </div>
+
+          <div>
+            <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Email Subject Line:</label>
+            <input type="text" class="input-box" id="inputEmailSubject" placeholder="Subject...">
+          </div>
+
+          <div>
+            <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Email Body:</label>
+            <textarea class="input-box" id="inputEmailBody" style="height: 200px; font-family: var(--font-family);"></textarea>
+          </div>
+
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <button class="btn btn-emerald" id="btnSendSmtpEmail">
+              🚀 Send via Free Gmail SMTP
+            </button>
+            <a href="#" class="btn btn-secondary" id="btnMailtoLaunch">
+              📬 Open in Desktop Mail App
+            </a>
+            <button class="btn btn-secondary" id="btnCopyEmailContent">
+              📋 Copy to Clipboard
+            </button>
+          </div>
+
+          <p style="font-size: 0.76rem; color: var(--text-muted); margin-top: 4px;">
+            💡 Direct SMTP uses your free Gmail App Password (configured in Tab 5). You can also click "Open in Mail App" to send directly from Apple Mail or Gmail Web.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TAB 4: KANBAN APPLICATION PIPELINE & AUTO-APPLY
+         ==================================================================== -->
+    <section class="tab-pane" id="tabTracker" role="tabpanel">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Application Pipeline & Interview Tracker</h2>
+          <p class="section-subtitle">Manage your end-to-end job funnel from initial discovery to interview scheduling and offer negotiation.</p>
+        </div>
+        <div>
+          <button class="btn btn-primary btn-sm" id="btnAddNewAppModal">
+            ➕ Add Job Application
+          </button>
+        </div>
+      </div>
+
+      <!-- Kanban Pipeline Columns -->
+      <div class="kanban-board">
+        <!-- Column 1: Discovered / Saved -->
+        <div class="kanban-column" id="kanbanColSaved">
+          <div class="kanban-col-header">
+            <span class="kanban-col-title">📌 Saved Jobs</span>
+            <span class="kanban-col-count" id="countSaved">0</span>
+          </div>
+          <div class="kanban-cards-container" id="cardsSaved"></div>
+        </div>
+
+        <!-- Column 2: ATS Tailored -->
+        <div class="kanban-column" id="kanbanColTailored">
+          <div class="kanban-col-header">
+            <span class="kanban-col-title">🎯 ATS Tailored</span>
+            <span class="kanban-col-count" id="countTailored">0</span>
+          </div>
+          <div class="kanban-cards-container" id="cardsTailored"></div>
+        </div>
+
+        <!-- Column 3: Cold Emailed / Applied -->
+        <div class="kanban-column" id="kanbanColApplied">
+          <div class="kanban-col-header">
+            <span class="kanban-col-title">🚀 Applied / Emailed</span>
+            <span class="kanban-col-count" id="countApplied">0</span>
+          </div>
+          <div class="kanban-cards-container" id="cardsApplied"></div>
+        </div>
+
+        <!-- Column 4: Interview Scheduled -->
+        <div class="kanban-column" id="kanbanColInterview">
+          <div class="kanban-col-header">
+            <span class="kanban-col-title">🎉 Interviewing</span>
+            <span class="kanban-col-count" id="countInterview">0</span>
+          </div>
+          <div class="kanban-cards-container" id="cardsInterview"></div>
+        </div>
+
+        <!-- Column 5: Offer Received -->
+        <div class="kanban-column" id="kanbanColOffer">
+          <div class="kanban-col-header">
+            <span class="kanban-col-title">🏆 Offers Received</span>
+            <span class="kanban-col-count" id="countOffer">0</span>
+          </div>
+          <div class="kanban-cards-container" id="cardsOffer"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TAB 5: CANDIDATE PROFILE & STEP-BY-STEP FREE SETUP GUIDE
+         ==================================================================== -->
+    <section class="tab-pane" id="tabProfile" role="tabpanel">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Candidate Profile & 100% Free Setup Guide</h2>
+          <p class="section-subtitle">Configure your resume details and follow the step-by-step setup to unlock 100% free AI and email automation.</p>
+        </div>
+        <div>
+          <button class="btn btn-emerald" id="btnSaveProfileSettings">
+            💾 Save Profile & Settings
+          </button>
+        </div>
+      </div>
+
+      <div class="setup-guide-grid">
+        <!-- Left: Profile Editor -->
+        <div class="ats-pane-card">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: #FFFFFF;">👤 Your Candidate Details</h3>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+              <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Full Name:</label>
+              <input type="text" class="input-box" id="profName">
+            </div>
+            <div>
+              <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Email:</label>
+              <input type="email" class="input-box" id="profEmail">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+              <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Phone Number:</label>
+              <input type="text" class="input-box" id="profPhone">
+            </div>
+            <div>
+              <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Location / Timezone:</label>
+              <input type="text" class="input-box" id="profLocation">
+            </div>
+          </div>
+
+          <div>
+            <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Target Job Titles (comma separated):</label>
+            <input type="text" class="input-box" id="profTargetRoles">
+          </div>
+
+          <div>
+            <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Core Skills (comma separated):</label>
+            <input type="text" class="input-box" id="profSkills">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+            <div>
+              <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">LinkedIn URL:</label>
+              <input type="text" class="input-box" id="profLinkedin">
+            </div>
+            <div>
+              <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">GitHub URL:</label>
+              <input type="text" class="input-box" id="profGithub">
+            </div>
+            <div>
+              <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Portfolio URL:</label>
+              <input type="text" class="input-box" id="profPortfolio">
+            </div>
+          </div>
+
+          <div>
+            <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Top Quantifiable Achievement (used in cold pitches):</label>
+            <input type="text" class="input-box" id="profTopAchievement" placeholder="e.g. engineered a pipeline cutting query latency by 45% for 100k+ users">
+          </div>
+
+          <div>
+            <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Professional Summary:</label>
+            <textarea class="input-box" id="profSummary" style="height: 100px;"></textarea>
+          </div>
+        </div>
+
+        <!-- Right: 100% Free Services Setup Instructions -->
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <!-- Step 1: Free Gemini API Key -->
+          <div class="guide-step-card">
+            <h4 style="font-size: 1.05rem; font-weight: 700; color: #FFFFFF; display: flex; align-items: center; margin-bottom: 8px;">
+              <span class="step-badge">1</span> Google Gemini AI (100% Free Tier)
+            </h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
+              Google provides 1,500 requests per day <strong>completely free of cost</strong> via Google AI Studio. Used for enhanced neural resume rewriting. (If omitted, our built-in offline NLP optimizer works automatically with 0 API keys).
+            </p>
+            <div style="margin-bottom: 10px;">
+              <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Gemini API Key (Optional):</label>
+              <input type="password" class="input-box" id="settingsGeminiKey" placeholder="AIzaSy...">
+            </div>
+            <a href="https://aistudio.google.com/app/apikey" target="_blank" class="btn btn-secondary btn-sm">
+              🔑 Get Free Gemini API Key (Takes 30 seconds)
+            </a>
+          </div>
+
+          <!-- Step 2: Free Gmail SMTP -->
+          <div class="guide-step-card">
+            <h4 style="font-size: 1.05rem; font-weight: 700; color: #FFFFFF; display: flex; align-items: center; margin-bottom: 8px;">
+              <span class="step-badge">2</span> Gmail Direct SMTP (100% Free)
+            </h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
+              Send personalized cold outreach directly from your Gmail address with zero spam flags. Google provides free 16-character App Passwords.
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+              <div>
+                <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Gmail Address:</label>
+                <input type="email" class="input-box" id="settingsGmailUser" placeholder="your.name@gmail.com">
+              </div>
+              <div>
+                <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">Gmail 16-char App Password:</label>
+                <input type="password" class="input-box" id="settingsGmailPassword" placeholder="••••••••••••••••">
+              </div>
+            </div>
+            <a href="https://myaccount.google.com/apppasswords" target="_blank" class="btn btn-secondary btn-sm">
+              🛡️ Generate Gmail App Password (Google Security)
+            </a>
+          </div>
+
+          <!-- Step 3: Zero-Cost Job Feeds -->
+          <div class="guide-step-card">
+            <h4 style="font-size: 1.05rem; font-weight: 700; color: #FFFFFF; display: flex; align-items: center; margin-bottom: 8px;">
+              <span class="step-badge">3</span> Free Multi-Provider Job Feeds
+            </h4>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+              Active feeds: <strong>Arbeitnow API</strong> (Tech & Remote), <strong>RemoteOK API</strong> (Global Devs), <strong>Jobicy API</strong> (Product & Tech). All require <strong>$0 and zero registration</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       MODAL: 1-CLICK AUTOFILL BOOKMARKLET
+       ==================================================================== -->
+  <div class="modal-backdrop" id="modalAutofill">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="btnCloseAutofillModal">&times;</button>
+      <h3 style="font-size: 1.25rem; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">
+        ⚡ 1-Click Application Autofill Assistant
+      </h3>
+      <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 18px;">
+        Drag this button directly to your browser's Bookmarks bar, or click on it on any job application page (Greenhouse, Lever, Workday, etc.) to autofill your information in 1 second!
+      </p>
+
+      <div style="background: rgba(13, 20, 36, 0.9); border: 1px dashed var(--border-highlight); padding: 24px; border-radius: var(--radius-lg); text-align: center; margin-bottom: 18px;">
+        <a href="#" id="bookmarkletLink" class="btn btn-primary" style="cursor: move; font-size: 1rem; padding: 12px 24px;">
+          ⚡ Auto-Apply Helper (Drag to Bookmarks)
+        </a>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">
+          (Click and drag the button above to your browser's bookmarks bar)
+        </p>
+      </div>
+
+      <div>
+        <label style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 6px;">Or Copy JavaScript Code directly:</label>
+        <textarea class="input-box" id="bookmarkletCodeArea" style="height: 100px; font-family: monospace; font-size: 0.78rem;" readonly></textarea>
+        <button class="btn btn-secondary btn-sm" id="btnCopyBookmarkletCode" style="margin-top: 8px;">
+          📋 Copy Code
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       MODAL: JOB DETAILS & ACTION
+       ==================================================================== -->
+  <div class="modal-backdrop" id="modalJobDetails">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="btnCloseJobModal">&times;</button>
+      <div id="modalJobHeader"></div>
+      <div id="modalJobTags" class="job-tags-row"></div>
+      <div id="modalJobActions" style="display: flex; gap: 10px; margin: 16px 0; padding-bottom: 16px; border-bottom: 1px solid var(--border-subtle);"></div>
+      <div id="modalJobBody" style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; max-height: 400px; overflow-y: auto;"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Application Scripts -->
+  <script src="js/app.js"></script>
+  <script src="js/jobs.js"></script>
+  <script src="js/ats.js"></script>
+  <script src="js/recruiter.js"></script>
+  <script src="js/tracker.js"></script>
+</body>
+</html>

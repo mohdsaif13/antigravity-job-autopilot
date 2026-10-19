@@ -1,0 +1,30 @@
+[
+  {
+    "id": "direct_pitch",
+    "name": "Direct Hiring Manager Pitch",
+    "purpose": "Best for messaging Engineering Managers or Department Heads directly",
+    "subject": "Quick question regarding {{job_title}} role at {{company}}",
+    "body": "Hi {{recruiter_name}},\n\nI noticed {{company}} is looking for a {{job_title}}, and I wanted to reach out directly because my background in {{key_skills}} aligns closely with what you're building.\n\nRecently, I {{top_achievement}}.\n\nI have attached my tailored resume, and you can see my work here: {{portfolio_url}} (GitHub: {{github_url}}).\n\nAre you open to a brief 10-minute chat this week to discuss how I can contribute to {{company}}'s roadmap?\n\nBest regards,\n{{user_name}}\n{{user_phone}}\n{{linkedin_url}}"
+  },
+  {
+    "id": "recruiter_referral",
+    "name": "Talent Acquisition / Recruiter Intro",
+    "purpose": "Best for internal recruiters and talent sourcers",
+    "subject": "{{job_title}} Application – {{user_name}}",
+    "body": "Hi {{recruiter_name}},\n\nI hope your week is going well!\n\nI recently applied for the {{job_title}} position at {{company}} (Job ID: {{job_id}}). Given my experience in {{key_skills}}, I was thrilled to see {{company}}'s focus on innovation in this space.\n\nKey highlights I bring:\n• Hands-on expertise in {{key_skills}}\n• Proven track record: {{top_achievement}}\n• Ready to hit the ground running with zero ramp-up time\n\nI would love the opportunity to speak with you or the hiring team. My resume and portfolio ({{portfolio_url}}) are ready for review.\n\nThanks for your time and consideration!\n\nWarm regards,\n{{user_name}}\n{{user_email}} | {{user_phone}}"
+  },
+  {
+    "id": "value_add_project",
+    "name": "Value-Add / Problem Solver Pitch",
+    "purpose": "High-conversion cold pitch showing you understand their challenges",
+    "subject": "Ideas for {{company}}'s engineering team / {{job_title}} role",
+    "body": "Hi {{recruiter_name}},\n\nI've been following {{company}}'s recent developments and was excited to spot the {{job_title}} opening.\n\nIn my previous role, I tackled challenges similar to what {{company}} is addressing, specifically focusing on {{key_skills}}. For instance, I {{top_achievement}}.\n\nI put together a quick outline of how I would approach the {{job_title}} objectives and would love to share it with your team.\n\nWould you have 10 minutes next Tuesday or Wednesday for a quick discussion?\n\nBest,\n{{user_name}}\n{{linkedin_url}}"
+  },
+  {
+    "id": "follow_up",
+    "name": "Application Follow-Up (Day 4-7)",
+    "purpose": "Gentle follow up that 3x increases interview callback rate",
+    "subject": "Following up: {{job_title}} application – {{user_name}}",
+    "body": "Hi {{recruiter_name}},\n\nI wanted to quickly follow up on my application submitted last week for the {{job_title}} role at {{company}}.\n\nI remain very enthusiastic about the position and confident that my background with {{key_skills}} would be an immediate asset to your team.\n\nPlease let me know if there are any additional materials, code samples, or references I can provide.\n\nLooking forward to hearing from you!\n\nBest regards,\n{{user_name}}\n{{user_email}} | {{user_phone}}"
+  }
+]

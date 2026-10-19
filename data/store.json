@@ -1,0 +1,28 @@
+{
+  "profile": {
+    "name": "Full Name",
+    "email": "your.email@gmail.com",
+    "phone": "+1 (555) 019-2834",
+    "location": "Remote / New York, NY",
+    "targetRoles": "Software Engineer, Full Stack Developer, Frontend Engineer, AI Engineer",
+    "skills": "JavaScript, TypeScript, React, Node.js, Express, Python, REST APIs, SQL, Git, Docker, AWS, TailwindCSS",
+    "experienceYears": "3+",
+    "summary": "Results-driven Software Engineer with 3+ years of experience building high-performance web applications, scalable REST APIs, and modern cloud architectures. Adept at full-stack development, problem-solving, and delivering user-centric digital products.",
+    "topAchievement": "engineered a real-time analytics pipeline reducing query latency by 45% and scaled the platform to 100k+ active users",
+    "linkedin": "https://linkedin.com/in/yourprofile",
+    "github": "https://github.com/yourprofile",
+    "portfolio": "https://yourportfolio.dev",
+    "resumeText": "FULL NAME\nyour.email@gmail.com | +1 (555) 019-2834 | New York, NY | linkedin.com/in/yourprofile | github.com/yourprofile\n\nPROFESSIONAL SUMMARY\nResults-driven Software Engineer with 3+ years of experience building high-performance web applications, scalable REST APIs, and modern cloud architectures. Adept at full-stack development, problem-solving, and delivering user-centric digital products.\n\nCORE SKILLS\nLanguages & Frameworks: JavaScript (ES6+), TypeScript, Python, Node.js, Express, React, Next.js, HTML5, CSS3\nDatabases & Cloud: PostgreSQL, MongoDB, Redis, Docker, AWS (S3, EC2), Git, CI/CD pipelines, RESTful APIs, GraphQL\nMethodologies: Agile/Scrum, Test-Driven Development (TDD), System Design, Performance Optimization\n\nPROFESSIONAL EXPERIENCE\nSoftware Engineer | Tech Innovations Inc. | 2022 - Present\n• Architected and deployed microservices handling 25,000+ daily requests using Node.js and TypeScript, reducing system downtime by 30%.\n• Designed interactive, accessible frontend components in React, improving user engagement metrics by 22%.\n• Optimized SQL database queries and introduced Redis caching layer, decreasing endpoint response times from 450ms to 85ms.\n• Collaborated cross-functionally with product managers and UX designers across 12 sprint cycles to deliver features ahead of schedule.\n\nJunior Web Developer | Digital Solutions Lab | 2020 - 2022\n• Developed and maintained 15+ client web applications using JavaScript, HTML5, CSS3, and REST APIs.\n• Implemented automated CI/CD deployment workflows, cutting staging release turnaround by 50%.\n• Conducted comprehensive code reviews and unit testing, maintaining over 85% test coverage.\n\nEDUCATION\nBachelor of Science in Computer Science | University of Technology | 2016 - 2020"
+  },
+  "settings": {
+    "geminiApiKey": "",
+    "gmailUser": "",
+    "gmailAppPassword": "",
+    "searchQuery": "Software Engineer",
+    "remoteOnly": true,
+    "locationFilter": "",
+    "autoSaveATS": true
+  },
+  "savedJobs": [],
+  "applications": []
+}
