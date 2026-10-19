@@ -3,7 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const multer = require('multer');
-const pdfParse = require('pdf-parse');
 
 const jobService = require('./services/jobService');
 const atsService = require('./services/atsService');
@@ -67,6 +66,9 @@ app.post('/api/upload-resume', upload.single('resumeFile'), async (req, res) => 
     if (!req.file) return res.status(400).json({ success: false, error: 'No file uploaded' });
     let extractedText = '';
     if (req.file.mimetype === 'application/pdf' || req.file.originalname.endsWith('.pdf')) {
+      // Load PDF parsing only when a PDF is uploaded. Some serverless runtimes lack
+      // the DOMMatrix/canvas globals required by pdf-parse v2 at module startup.
+      const pdfParse = require('pdf-parse');
       const pdfData = await pdfParse(req.file.buffer);
       extractedText = pdfData.text;
     } else {
